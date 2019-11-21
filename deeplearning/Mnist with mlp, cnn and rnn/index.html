@@ -1,0 +1,575 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.5.0">
+    
+    
+      
+        <title>Mnist with mlp, cnn and rnn - cosmism</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../custom/extra.css">
+    
+      <link rel="stylesheet" href="../../custom/nord.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#mnist-with-mlp-cnn-and-rnn" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="cosmism" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              cosmism
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Mnist with mlp, cnn and rnn
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="cosmism" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    cosmism
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Welcome to MkDocs" class="md-nav__link">
+      Welcome to MkDocs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      C++ & Algorithm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        C++ & Algorithm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../C++ & Algorithm/" title="C++ & Algorithm" class="md-nav__link">
+      C++ & Algorithm
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../C++ & Algorithm/c++ iterator/" title="C++ iterator" class="md-nav__link">
+      C++ iterator
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../C++ & Algorithm/c++ vector/" title="C++ vector" class="md-nav__link">
+      C++ vector
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Deeplearning
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Deeplearning
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Functional Api & Y-Network with Keras/" title="Functional Api & Y Network with Keras" class="md-nav__link">
+      Functional Api & Y Network with Keras
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Mnist with mlp, cnn and rnn
+      </label>
+    
+    <a href="./" title="Mnist with mlp, cnn and rnn" class="md-nav__link md-nav__link--active">
+      Mnist with mlp, cnn and rnn
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mnist-with-mlp-cnn-and-rnn" class="md-nav__link">
+    Mnist with mlp, cnn and rnn
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mlp-input-shape" class="md-nav__link">
+    mlp input shape
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cnn-input-shape" class="md-nav__link">
+    cnn input shape
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rnn-input-shape" class="md-nav__link">
+    rnn input shape
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ResNet/" title="ResNet" class="md-nav__link">
+      ResNet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../keras mnist/" title="Keras mnist" class="md-nav__link">
+      Keras mnist
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mnist-with-mlp-cnn-and-rnn" class="md-nav__link">
+    Mnist with mlp, cnn and rnn
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mlp-input-shape" class="md-nav__link">
+    mlp input shape
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cnn-input-shape" class="md-nav__link">
+    cnn input shape
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rnn-input-shape" class="md-nav__link">
+    rnn input shape
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Mnist with mlp, cnn and rnn</h1>
+                
+                <h2 id="mnist-with-mlp-cnn-and-rnn">Mnist with mlp, cnn and rnn</h2>
+<hr />
+<p>Date : 2019/11/17</p>
+<p>Ref : 케라스로 구현하는 고급 딥러닝 알고리즘 [chapter 1]</p>
+<hr />
+<p>dense레이어와 conv, simpleRnn레이어에서 요구하는 input shape이 각각 다르기 때문에, 레이어에 맞게 데이터의 shape을 변경해주어야 한다.</p>
+<p>mnist의 이미지 크기는 28*28이다.</p>
+<h3 id="mlp-input-shape">mlp input shape</h3>
+<p>28 * 28 크기의  60000장 이미지[ (60000, 28, 28) ]를 784(이미지의 넓이) * 60000 장 형태[ (60000, 784) ]로 만들어야 한다.</p>
+<pre><code class="python">x_train = np.reshape(x_train, [-1, input_size])
+x_test = np.reshape(x_test, [-1, input_size])
+input_size = image_size * image_size
+model.add(Dense(hidden_units, input_dim=input_size))
+</code></pre>
+
+<h3 id="cnn-input-shape">cnn input shape</h3>
+<p>cnn은 input_shape=(n, m, 3) 의 형태가 되어야 한다. 마지막 인자는 rgb(3)인지, grayscale(1)인지를 뜻한다. </p>
+<pre><code class="python">x_train = np.reshape(x_train,[-1, image_size, image_size, 1])
+x_test = np.reshape(x_test,[-1, image_size, image_size, 1])
+input_shape = (image_size, image_size, 1)
+model.add(Conv2D(filters=filters, kernel_size=kernel_size, activation='relu', input_shape=input_shape))
+</code></pre>
+
+<h3 id="rnn-input-shape">rnn input shape</h3>
+<p>rnn은 책의 텍스트가 매끄럽지 않고, 설명도 부족해서 <a href="https://buomsoo-kim.github.io/keras/2019/06/25/Easy-deep-learning-with-Keras-15.md/">블로그</a>를 참고했다.</p>
+<p>rnn은 (batch_size, timesteps, input_dim)의 형태가 되어야 한다.</p>
+<ul>
+<li>batch_size : 데이터 인스턴스의 갯수 </li>
+<li>timesteps :  인풋 시퀀스의 갯수 # input_length </li>
+<li>input_dim :  각 인풋 시퀀스의 차원 # 입력의 크기 </li>
+</ul>
+<pre><code class="python">X_train = np.reshape(x_train,[-1, image_size, image_size])
+input_shape = (image_size, image_size)
+model.add(SimpleRNN(units=units, dropout=dropout, input_shape=input_shape))
+# input shape (timesteps(28), input_dim(28)) 
+</code></pre>
+
+<ul>
+<li>return_sequences :  출력 시퀀스에서 마지막 출력을 반환할지 또는 전체 시퀀스를 반환할지 여부</li>
+</ul>
+<pre><code class="python">from keras.layers import Input
+inputs = Input(shape=(28,28))
+rnn = SimpleRNN(50, return_sequences = True)(inputs)
+# rnn.shape (?, ?, 50)
+rnn = SimpleRNN(50, return_sequences = False)(inputs)
+# rnn.shape (?, 50)
+</code></pre>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../Functional Api & Y-Network with Keras/" title="Functional Api & Y Network with Keras" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Functional Api & Y Network with Keras
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../ResNet/" title="ResNet" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                ResNet
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.a8b5e56f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../custom/highlight.pack.js"></script>
+      
+        <script src="../../custom/init.js"></script>
+      
+    
+  </body>
+</html>
